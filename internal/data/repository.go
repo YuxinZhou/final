@@ -13,8 +13,10 @@ import (
 var repository biz.Repository
 var once sync.Once
 
+const userTableName = "users"
+
 type repositoryImpl struct {
-	database *sql.DB
+	db *sql.DB
 }
 
 func GetRepository() biz.Repository {
@@ -25,12 +27,11 @@ func GetRepository() biz.Repository {
 }
 
 func NewRepositoryImpl(dqlDB *sql.DB) biz.Repository {
-	if err := db.GetDb().Table("user").AutoMigrate(&biz.User{}); err != nil {
+	// initialize DB schema
+	if err := db.GetDb().Table(userTableName).AutoMigrate(&biz.User{}); err != nil {
 		log.Fatal(err)
 	}
 
-
-
-	repository = &repositoryImpl{database: dqlDB}
+	repository = &repositoryImpl{db: dqlDB}
 	return repository
 }

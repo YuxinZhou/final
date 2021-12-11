@@ -2,6 +2,7 @@ package account
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"final/api"
@@ -24,6 +25,9 @@ func (s *Server) CreateUser(ctx context.Context, in *api.UserInfo) (*api.Empty, 
 	}
 
 	err := s.UserIf.CreateUser(ctx, user)
+	if err != nil {
+		fmt.Printf("err: %+v", err) // log the stack trace
+	}
 
 	return &api.Empty{}, err
 }

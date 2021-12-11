@@ -11,8 +11,8 @@ const (
 
 // User defines the Domain Object for a user. For simplification purposes, it is used as PO (Persistence object) as well.
 type User struct {
+	ID           uint     `gorm:"auto_increment"`
 	Name         string     `gorm:"not null"`
-	ID           string     `gorm:"not null"`
 	Email        string     `gorm:"not null"`
 	CreationTime int64      `gorm:"not null;type:bigint"`
 	Status       UserStatus `gorm:"not null"`

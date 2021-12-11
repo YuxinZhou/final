@@ -14,10 +14,11 @@ var sqlDB *sql.DB
 
 const maxDBConnections = 3
 
+const DatabaseName = "user_system"
+
 // InitDb initializes the global handle.
 func InitDb() {
-	dbName := "user_system"
-	connStr := fmt.Sprintf("root@tcp(127.0.0.1:3306)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbName) // connect to local DB
+	connStr := fmt.Sprintf("root@tcp(127.0.0.1:3306)/%s?charset=utf8mb4&parseTime=True&loc=Local", DatabaseName) // connect to local DB
 
 	var err error
 	gDb, err = gorm.Open(mysql.Open(connStr), &gorm.Config{})
