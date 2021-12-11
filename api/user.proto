@@ -1,0 +1,50 @@
+// [START declaration]
+syntax = "proto3";
+package api;
+
+// [END declaration]
+
+// [START go_declaration]
+option go_package = "github.com/YuxinZhou/final/api";
+// [END go_declaration]
+
+// [START messages]
+message UserInfo {
+  string name = 1;
+  int32 id = 2;  // Unique ID number for this User.
+  string email = 3;
+}
+
+
+message UserDetail {
+  string name = 1;
+  int32 id = 2;  // Unique ID number for this User.
+  string email = 3;
+
+  enum Status {
+    ACTIVE = 0;
+    INACTIVE = 1;
+  }
+
+  Status status = 4;
+}
+
+message UserDetailList {
+  repeated UserDetail userDetail = 1;
+}
+
+message Empty {
+}
+
+// [END messages]
+
+// [START service]
+service Account {
+  rpc CreateUser (UserInfo) returns (Empty) {}
+}
+
+service Admin {
+  rpc ListUserDetails(Empty) returns (UserDetailList) {}
+}
+
+// [END service]
